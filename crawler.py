@@ -27,7 +27,7 @@ class Actions:
     def processUrls(url, object):
         hrefs = Actions.getHref(url)
         for x in hrefs:
-            if object.base_url in x and x not in object.dq and x not in object.crawled:
+            if (object.base_url in x or "http" + object.base_url[5:] in x) and x not in object.dq and x not in object.crawled:
                 object.dq.appendleft(x)
                 print(x)
             continue
