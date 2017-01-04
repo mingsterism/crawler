@@ -8,6 +8,6 @@ RUN pip3 install requests
 RUN apt-get -y install build-essential
 RUN pip3 install Cython
 RUN pip3 install pybloomfiltermmap3
-
+RUN pip3 install beautifulsoup4
 
 

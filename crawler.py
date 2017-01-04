@@ -3,6 +3,7 @@ from lxml import html
 from collections import deque
 from pybloomfilter import BloomFilter
 import argparse
+from bs4 import BeautifulSoup
 
 class Site:
     def __init__(self, r_site):
