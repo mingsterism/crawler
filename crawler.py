@@ -30,9 +30,17 @@ class Actions:
         for x in hrefs:
             if (object.base_url in x or "http" + object.base_url[5:] in x) and x not in object.dq and x not in object.crawled:
                 object.dq.appendleft(x)
-                print(x)
+                #print(x)
             continue
         return object.dq
+
+    @staticmethod
+    def extractTitles(url):
+        r = requests.get(url)
+        rsoup = BeautifulSoup(r.content, 'lxml')
+        titles = rsoup.find_all('a')
+        for y in titles:
+            print(y.text.encode('utf-8'))
    
 def recurseCrawl(url, object):
     if (len(object.dq) != 0): 
@@ -50,6 +58,7 @@ if __name__ == '__main__':
     print(Actions.processUrls(url, a1))
     while(len(a1.dq)!= 0):
         nxtUrl = a1.dq.pop().strip()
+        Actions.extractTitles(nxtUrl)
         Actions.processUrls(nxtUrl, a1)
         a1.crawled.add(nxtUrl.rstrip())
 

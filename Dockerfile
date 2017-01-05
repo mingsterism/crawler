@@ -9,5 +9,6 @@ RUN apt-get -y install build-essential
 RUN pip3 install Cython
 RUN pip3 install pybloomfiltermmap3
 RUN pip3 install beautifulsoup4
-
+RUN apt-get -y install vim && apt-get -y install git
+RUN git clone https://github.com/mingsterism/crawler
 
