@@ -1,0 +1,6 @@
+requests
+lxml
+Cython
+pybloomfiltermmap3
+beautifulsoup4
+click

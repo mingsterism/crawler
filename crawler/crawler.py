@@ -12,7 +12,7 @@ class Site:
         self.content = requests_result.content
         self.base_url = requests_result.url
         self.dq = deque()
-        self.crawled = BloomFilter(1000000, 0.01, 'filter-bloom')
+        self.crawled = set()  # BloomFilter(1000000, 0.01, 'filter-bloom')
 
     def base_info(self):
         info = {'url': self.url, 'headers': self.headers}
@@ -29,12 +29,23 @@ class Actions:
 
     @staticmethod
     def process_urls(url, site):
-        hrefs = Actions.get_href(url)
-        for x in hrefs:
-            if (site.base_url in x or "http" + site.base_url[5:] in x) and x not in site.dq and x not in site.crawled:
-                site.dq.appendleft(x)
-                #print(x)
-            continue
+        href_results = Actions.get_href(url)
+        href_results = [h.strip() for h in href_results]
+
+        # Fix bug for relative urls:
+        hrefs = [site.base_url + h if h.startswith('/') and len(h) > 1 else h for h in href_results]
+
+        # Now filter out those here only
+        hrefs = [h for h in hrefs if h.startswith(site.base_url)]
+
+        for href in hrefs:
+            if href not in site.crawled:
+                with open('/tmp/crawled.txt', 'w') as file_:
+                    file_.write(href + '\n')
+                site.dq.appendleft(href)
+                site.crawled.add(href)
+            else:
+                pass  # print("NOT appending {}".format(href))
         return site.dq
 
     @staticmethod
