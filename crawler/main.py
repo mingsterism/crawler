@@ -23,19 +23,19 @@ def entry_point(ctx):
 
 @entry_point.command('launch')
 @click.argument('url')
+@click.option('--verbose', is_flag=True, default=False, help="Output to screen")
 @click.pass_obj
-def launch(obj, url):
+def launch(obj, url, verbose):
     result = requests.get(url)
-    print(result.text)
 
     if result.ok:
         site = Site(result)
 
         from pprint import pprint
         processed = Actions.process_urls(url, site)
-        pprint(processed)
+        verbose and pprint(processed)
 
         while(len(site.dq) != 0):
             next_url = site.dq.pop().strip()
             found_urls = Actions.process_urls(next_url, site)
-            pprint(found_urls)
+            verbose and pprint(found_urls)
