@@ -37,4 +37,5 @@ def launch(obj, url):
 
         while(len(site.dq) != 0):
             next_url = site.dq.pop().strip()
-            Actions.process_urls(next_url, site)
+            found_urls = Actions.process_urls(next_url, site)
+            pprint(found_urls)
