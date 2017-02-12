@@ -1,0 +1,7 @@
+version: '2'
+services:
+   crawler1:
+        build:
+            context: .
+            args:
+                url: http://www.thestar.com.my
