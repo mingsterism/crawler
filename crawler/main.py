@@ -32,10 +32,10 @@ def launch(obj, url, verbose):
         site = Site(result)
 
         from pprint import pprint
-        processed = Actions.process_urls(url, site)
-        verbose and pprint(processed)
+        processed_site = Actions.process_urls(site)
+        verbose and pprint(processed_site.dq)
 
-        while(len(site.dq) != 0):
-            next_url = site.dq.pop().strip()
-            found_urls = Actions.process_urls(next_url, site)
-            verbose and pprint(found_urls)
+        while(len(processed_site.dq) != 0):
+            processed_site.url = processed_site.dq.pop().strip()
+            processed_site = Actions.process_urls(processed_site)
+            verbose and print(processed_site.url, "deque length: ", len(processed_site.dq), "crawled legnth: ", len(processed_site.crawled))
