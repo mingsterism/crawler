@@ -2,6 +2,7 @@ import click
 from pprint import pprint
 from crawler.crawler import Site, Actions
 import requests
+from __future__ import print_function, absolute_import, division
 
 
 def recurse_crawl(url, object):
@@ -38,4 +39,4 @@ def launch(obj, url, verbose):
         while(len(processed_site.dq) != 0):
             processed_site.url = processed_site.dq.pop().strip()
             processed_site = Actions.process_urls(processed_site)
-            verbose and print processed_site.url, "deque length: ", len(processed_site.dq), "crawled legnth: ", len(processed_site.crawled)
+            verbose and print(processed_site.url, "deque length: ", len(processed_site.dq), "crawled legnth: ", len(processed_site.crawled))
