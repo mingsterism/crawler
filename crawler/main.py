@@ -1,8 +1,8 @@
+from __future__ import print_function, absolute_import, division
 import click
 from pprint import pprint
 from crawler.crawler import Site, Actions
 import requests
-from __future__ import print_function, absolute_import, division
 
 
 def recurse_crawl(url, object):

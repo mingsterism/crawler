@@ -4,7 +4,6 @@ RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y python-pip
 RUN apt-get install git -y
 RUN git clone https://github.com/mingsterism/crawler /home/crawl
-
 ENV crawlerDir /home/crawl
 WORKDIR $crawlerDir
 RUN pwd
