@@ -18,8 +18,8 @@ class Site:
         return info
 
 class Actions:
-
-    def __get_href(url):
+    @staticmethod
+    def _get_href(url):
         """ Private function that accepts a URL string and returns a list of href"""
         result = requests.get(url)
         content = result.content 
@@ -32,7 +32,7 @@ class Actions:
         site object is a requests.get() object. eg: siteObject = requests.get(url)
         Will add list of urls into object.dq and object.crawled deque() and set() respectively.
         """
-        href_results = Actions.__get_href(site.url)
+        href_results = Actions._get_href(site.url)
         href_results = [h.strip() for h in href_results]
 
         # Fix bug for relative urls:
