@@ -4,9 +4,14 @@ RUN apt-get -y update && apt-get -y upgrade
 RUN apt-get install -y python-pip
 RUN apt-get install git -y
 RUN git clone https://github.com/mingsterism/crawler /home/crawl
+
+
 ENV crawlerDir /home/crawl
 WORKDIR $crawlerDir
 RUN pwd
 RUN ls .
 RUN pip install -e .
-RUN ["crawl", "launch", "--verbose", "http://www.thestar.com.my"]
+ARG url
+ENTRYPOINT crawl launch --verbose $url
+#RUN crawl launch --verbose $url
+#RUN ["crawl", "launch", "--verbose", "http://www.thestar.com.my"]
