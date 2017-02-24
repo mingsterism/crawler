@@ -1,7 +1,7 @@
 # crawler
 
 ### Commands
-docker build -t crawl1 .
+docker build -t crawl1 . <br>
 docker run -e url="http://www.thestar.com.my" crawl1
 
 ### ToDo
