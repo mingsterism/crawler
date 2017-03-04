@@ -11,6 +11,6 @@ setup(
         [console_scripts]
         crawl=crawler.main:entry_point
     ''',
-    install_requires = ['requests', 'lxml', 'Cython', 'beautifulsoup4', 'click'],
+    install_requires = ['requests', 'lxml', 'Cython', 'beautifulsoup4', 'click', 'readability'],
     long_description = """"""
 )

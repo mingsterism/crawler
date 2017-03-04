@@ -3,6 +3,7 @@ from lxml import html
 from collections import deque
 import argparse
 from bs4 import BeautifulSoup
+from readability.readability import Document
 
 class Site:
     def __init__(self, requests_result):
@@ -54,5 +55,17 @@ class Actions:
         with open(file, 'w') as file_:
             file_.write(result)
 
-   
+    @staticmethod
+    def _cleanText(text):
+        REGEX = re.compile(r'(<.*?>|\t|\n)')
+        return re.sub(REGEX, "", text)
+
+    @staticmethod
+    def getArticle(url):
+        """ Accepts a url and returns a string 
+        containing the article body of the url"""
+        r = requests.get(url)
+        r_content = r.content
+        article = Document(r_content).summary()
+        return Actions._cleanText(article) 
 

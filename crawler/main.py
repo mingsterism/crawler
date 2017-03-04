@@ -41,3 +41,4 @@ def launch(obj, url, verbose):
             processed_site = Actions.process_urls(processed_site)
             verbose and print(processed_site.url)
             verbose and print("deque length: ", len(processed_site.dq), "crawled legnth: ", len(processed_site.crawled))
+            print(Actions.getArticle(processed_site.url))
